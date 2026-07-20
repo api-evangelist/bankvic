@@ -1,0 +1,61 @@
+aid: bankvic
+name: BankVic
+review:
+  question: Does BankVic expose a confirmed public API surface, and what is its posture?
+  answer: true
+  date: '2026-07-20'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    BankVic's public API posture is entirely defined by its obligations as a
+    regulated Australian ADI under the Consumer Data Right (CDR / Open Banking),
+    not by any voluntary developer program. It publishes a public, unauthenticated
+    Product Reference Data (PRD) API and links to it plainly from its Open Banking
+    help page. The PRD endpoint was confirmed live: GET
+    https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products returned
+    HTTP 200 with header x-v: 4 and a data.products array (meta.totalRecords 55,
+    totalPages 11). A version negotiation check (x-v: 3) correctly returned HTTP
+    406 UnsupportedVersion advising Available: 4, confirming a standards-compliant
+    CDS implementation. There is NO general-purpose or fintech-style developer
+    portal (no developer.bankvic.com.au, no Up-style personal-banking API); the
+    bank explicitly notes the PRD endpoints "require specialist developer tools
+    to access them." Consumer data sharing beyond PRD is not a public API surface:
+    it is mediated through accredited data recipients (ADRs) under the CDR consent
+    and authentication model.
+  ownership: |
+    Customer-owned mutual bank; trading name of Police Financial Services Limited,
+    an authorised deposit-taking institution founded 1974, Melbourne, Victoria.
+  cdrPrdConfirmed: true
+  developerPortal: none
+  authModel: |
+    The Product Reference Data API is public and unauthenticated by CDR design.
+    All consumer (customer) data sharing is authenticated under the CDR / Open
+    Banking model: OAuth2 / OpenID Connect with FAPI profiles, brokered through
+    the CDR Register and accredited data recipients (ADR model). BankVic acts as
+    a Data Holder; it does not issue its own developer API keys.
+  specProvenance: |
+    The harvested OpenAPI (openapi/bankvic-cds-banking-products-openapi.yml) is
+    the shared Data Standards Body (DSB) Consumer Data Standards "CDR Banking API"
+    (OpenAPI 3.0.3), captured verbatim from
+    consumerdatastandardsaustralia.github.io. It is the standard to which BankVic's
+    endpoint conforms, NOT a bank-proprietary contract. BankVic does not publish
+    its own OpenAPI definition.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1
+      documented: true
+      note: CDR Product Reference Data. Public, unauthenticated. Confirmed HTTP 200, x-v 4.
+  endpointsConfirmedRest:
+    - GET https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
+    - GET https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products/{productId}
+sources:
+  - url: https://www.bankvic.com.au/get-help/open-banking/
+    type: Documentation
+    note: BankVic Open Banking page; lists the two PRD endpoints verbatim and describes CDR data sharing via accredited providers.
+  - url: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
+    type: APIReference
+    note: Live PRD endpoint. HTTP 200 with x-v 4 and data.products (55 records); HTTP 406 UnsupportedVersion on x-v 3.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/
+    type: APIReference
+    note: DSB Consumer Data Standards; source of the shared CDR Banking API OpenAPI harvested into openapi/.

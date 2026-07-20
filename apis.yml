@@ -1,0 +1,62 @@
+aid: bankvic
+url: https://raw.githubusercontent.com/api-evangelist/bankvic/refs/heads/main/apis.yml
+name: BankVic
+kind: company
+description: BankVic is an Australian customer-owned mutual bank and the trading name
+  of Police Financial Services Limited, an authorised deposit-taking institution (ADI)
+  founded in 1974 and headquartered in Melbourne, Victoria. Member-owned rather than
+  shareholder-driven, it has served Victoria's police, health, and emergency-services
+  communities and the broader Victorian public under a "people before profits" ethos
+  for more than fifty years, offering everyday accounts, home and personal loans,
+  term deposits, credit cards, and insurance. As a regulated ADI, BankVic participates
+  in Australia's Consumer Data Right (CDR / Open Banking) regime and exposes a public,
+  unauthenticated Product Reference Data (PRD) API conforming to the Data Standards
+  Body (DSB) Consumer Data Standards, alongside its consented, ADR-mediated consumer
+  data-sharing surface.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Banks
+- Open Banking
+- CDR
+- Consumer Banking
+- Australia
+- Mutual Bank
+- Product Reference Data
+created: '2026-07-20'
+modified: '2026-07-20'
+specificationVersion: '0.19'
+apis:
+- aid: bankvic:bankvic-cdr-product-reference-data-api
+  name: BankVic CDR Product Reference Data API
+  tags:
+  - CDR
+  - Open Banking
+  - Product Reference Data
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1
+  properties:
+  - url: https://www.bankvic.com.au/get-help/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+    type: APIReference
+  - url: openapi/bankvic-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Public, unauthenticated Consumer Data Right Product Reference Data (PRD)
+    API exposing BankVic's product catalogue (accounts, loans, term deposits, credit
+    cards) with terms, conditions, and key features. Live at the standard CDS path
+    GET /banking/products and GET /banking/products/{productId}; confirmed returning
+    HTTP 200 with x-v 4 and a data.products array (55 products across 11 pages). The
+    contract conforms to the shared DSB Consumer Data Standards, not a bank-proprietary
+    specification.
+common:
+- type: Website
+  url: https://www.bankvic.com.au/
+- type: Documentation
+  url: https://www.bankvic.com.au/get-help/open-banking/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
