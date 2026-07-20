@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.bankvic.com.au/get-help/open-banking/
+docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+note: >-
+  The OpenAPI contract in this repo (the shared DSB CDR Banking API) declares no
+  securitySchemes, because it documents both the public Product Reference Data (PRD)
+  surface and the consented consumer-data surface in one file. BankVic's exposed
+  public API — GET /banking/products and GET /banking/products/{productId} — is
+  UNAUTHENTICATED by CDR rule (PRD requires no consumer authorisation and no client
+  credentials; confirmed live returning HTTP 200 with only the mandatory x-v request
+  header). The authenticated consumer-data-sharing surface is not directly callable
+  by third parties: it is reached only through an accredited Data Recipient (ADR)
+  under the CDR security profile.
+summary:
+  types: [none-public, oauth2, openIdConnect, mutualTLS]
+  api_key_in: []
+  oauth2_flows: [authorizationCode]
+  public_endpoints_unauthenticated: true
+schemes:
+  - name: PRD (Product Reference Data)
+    type: none
+    applies_to: [listBankingProducts, getBankingProductDetail]
+    detail: >-
+      Public, unauthenticated. Only the mandatory `x-v` version-negotiation request
+      header is required (optional `x-min-v`). No API key, no OAuth token, no mTLS.
+    sources: [openapi/bankvic-cds-banking-products-openapi.yml]
+  - name: CDR Consumer Data Sharing (FAPI 2.0 profile)
+    type: oauth2
+    scheme: authorizationCode
+    detail: >-
+      Consented account/transaction/balance/direct-debit/scheduled-payment/payee data
+      is shared only via an accredited Data Recipient using the CDR security profile:
+      OpenID Connect + OAuth 2.0 authorization code flow with PKCE, PAR, mTLS-bound
+      sender-constrained access tokens, and CDR-issued client registration (DCR).
+      BankVic acts as the Data Holder; there is no self-service developer OAuth client
+      for the general public.
+    conforms: [FAPI 2.0, OIDC, PKCE, mTLS, RFC 9126 PAR]
+    sources: [https://consumerdatastandardsaustralia.github.io/standards/#security-profile]

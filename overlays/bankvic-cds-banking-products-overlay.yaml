@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for BankVic CDR Banking API
+  version: 1.0.0
+extends: openapi/bankvic-cds-banking-products-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: bankvic
+      x-apievangelist-public-surface:
+        - listBankingProducts
+        - getBankingProductDetail
+      x-apievangelist-notes: >-
+        Shared DSB Consumer Data Standards contract. BankVic exposes only the
+        unauthenticated Product Reference Data endpoints publicly; the remaining
+        operations require an accredited CDR Data Recipient.
+  - target: $.servers
+    update:
+      x-apievangelist-production-server: https://ib.bankvic.com.au/openbanking/cds-au/v1
+  - target: $.paths['/banking/products'].get
+    update:
+      x-apievangelist-status: live
+      x-apievangelist-negotiated-version: 4
+  - target: $.paths['/banking/products/{productId}'].get
+    update:
+      x-apievangelist-status: live
+      x-apievangelist-negotiated-version: 4

@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/bankvic-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+note: >-
+  BankVic's PRD API tracks the shared DSB Consumer Data Standards; endpoint lifecycle
+  is governed by the CDR versioning + Future Dated Obligations regime rather than a
+  bank-proprietary policy.
+versioning:
+  scheme: per-endpoint header versioning (x-v)
+  standards_version: 1.36.0
+  current: { products: 4 }
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+  detail: >-
+    Each endpoint is independently versioned; clients negotiate with x-v / x-min-v.
+    Products currently serves x-v 4 (confirmed live). Prior endpoint versions are
+    retained and documented as "Obsolete versions" until formally retired.
+deprecation:
+  policy_url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+  mechanism: >-
+    CDR Future Dated Obligations schedule announces new/retiring endpoint versions
+    with lead time; obsolete endpoint versions are published (e.g. get-accounts v1/v2)
+    before removal. A 406 (Header/InvalidVersion) is returned for unsupported versions.
+  sunset_header: false
+sla:
+  detail: >-
+    No public API SLA for the unauthenticated PRD surface. The consented CDR surface is
+    bound by the DSB Non-Functional Requirements (availability + performance thresholds).
+status_page: null
+status_page_note: No dedicated API status page found for BankVic.
+deprecated_operations: []

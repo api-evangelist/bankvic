@@ -1,0 +1,60 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/bankvic-cds-banking-products-openapi.yml
+note: >-
+  Entity-relationship graph for BankVic's public CDR Product Reference Data domain,
+  derived from the OpenAPI component schemas ($ref composition). Only the publicly
+  exposed Products domain is modelled; the consented account/transaction entities of
+  the broader CDR banking standard are out of BankVic's public surface.
+entities:
+  - name: BankingProduct
+    schema: BankingProductV6
+    id: productId
+    summary: Summary product record returned by GET /banking/products.
+    key_fields: [productId, productCategory, name, description, brand, brandName, applicationUri, lastUpdated, isTailored]
+  - name: BankingProductDetail
+    schema: BankingProductDetailV7
+    id: productId
+    summary: Full product record returned by GET /banking/products/{productId}; extends BankingProduct.
+  - name: BankingProductBundle
+    schema: BankingProductBundle
+  - name: BankingProductFeature
+    schema: BankingProductFeatureV4
+  - name: BankingProductConstraint
+    schema: BankingProductConstraintV3
+  - name: BankingProductEligibility
+    schema: BankingProductEligibilityV2
+  - name: BankingProductFee
+    schema: BankingProductFeeV2
+  - name: BankingProductDiscount
+    schema: BankingProductDiscountV2
+  - name: BankingProductDepositRate
+    schema: BankingProductDepositRateV2
+  - name: BankingProductLendingRate
+    schema: BankingProductLendingRateV3
+  - name: BankingProductRateTier
+    schema: BankingProductRateTierV4
+  - name: BankingProductInstalments
+    schema: BankingProductInstalments
+  - name: BankingProductCardArt
+    schema: BankingProductCardArt
+relationships:
+  - from: BankingProductDetail
+    to: BankingProduct
+    kind: is_a
+    via: allOf(BankingProductV6)
+  - { from: BankingProductDetail, to: BankingProductBundle, kind: has_many, via: bundles }
+  - { from: BankingProductDetail, to: BankingProductFeature, kind: has_many, via: features }
+  - { from: BankingProductDetail, to: BankingProductConstraint, kind: has_many, via: constraints }
+  - { from: BankingProductDetail, to: BankingProductEligibility, kind: has_many, via: eligibility }
+  - { from: BankingProductDetail, to: BankingProductFee, kind: has_many, via: fees }
+  - { from: BankingProductDetail, to: BankingProductDepositRate, kind: has_many, via: depositRates }
+  - { from: BankingProductDetail, to: BankingProductLendingRate, kind: has_many, via: lendingRates }
+  - { from: BankingProductDetail, to: BankingProductCardArt, kind: has_many, via: cardArt }
+  - { from: BankingProductFee, to: BankingProductDiscount, kind: has_many, via: discounts }
+  - { from: BankingProductDepositRate, to: BankingProductRateTier, kind: has_many, via: tiers }
+  - { from: BankingProductLendingRate, to: BankingProductRateTier, kind: has_many, via: tiers }
+  - { from: BankingProductLendingRate, to: BankingProductInstalments, kind: has_one, via: instalments }
+id_reference_fields:
+  - { field: productId, references: BankingProduct, format: BankingProductId (ASCIIString) }
+  - { field: bundleName, references: BankingProductBundle }

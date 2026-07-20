@@ -1,0 +1,54 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/bankvic-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#introduction
+note: >-
+  Cross-cutting request/response semantics for BankVic's public CDR Product Reference
+  Data API, per the shared DSB Consumer Data Standards. Derived from the OpenAPI and
+  confirmed against the live endpoint.
+authentication:
+  style: none (public PRD) / FAPI 2.0 OIDC + mTLS for consented data
+  ref: authentication/bankvic-authentication.yml
+versioning:
+  style: header-negotiated
+  request_headers: [x-v, x-min-v]
+  response_header: x-v
+  detail: >-
+    Clients MUST send x-v (positive integer) naming the endpoint version requested;
+    optional x-min-v sets the minimum acceptable. The holder responds with the highest
+    supported version between x-min-v and x-v in the x-v response header, or 406
+    (Header/InvalidVersion) if none supported. Products negotiates to x-v 4 (confirmed live).
+pagination:
+  style: page-number
+  params: [page, page-size]
+  defaults: { page: 1, page-size: 25 }
+  response_meta: [meta.totalRecords, meta.totalPages]
+  response_links: [links.self, links.first, links.prev, links.next, links.last]
+  detail: >-
+    Standard CDS pagination. `page` is 1-based; `page-size` default 25. Response carries
+    a MetaPaginated (totalRecords/totalPages) and LinksPaginated (self/first/prev/next/last).
+    Confirmed live: 55 products across pages.
+filtering:
+  params: [effective, updated-since, brand, product-category, open-status, is-owned]
+  detail: >-
+    GET /banking/products supports effective (CURRENT|FUTURE|ALL), updated-since
+    (DateTimeString), brand, and product-category filters.
+idempotency:
+  supported: false
+  detail: >-
+    The public PRD surface is read-only (GET only); there is no mutation and therefore
+    no idempotency-key contract. The batch endpoints that use POST elsewhere in the CDR
+    banking standard are consented data reads, not writes, and are not part of BankVic's
+    public surface. No Idempotency-Key header is defined.
+request_tracing:
+  header: x-fapi-interaction-id
+  detail: >-
+    The CDR standard defines x-fapi-interaction-id for request correlation on the
+    consented surface; not required for the unauthenticated PRD endpoints.
+error_envelope:
+  shape: '{ "errors": [ { "code", "title", "detail", "meta": { "urn" } } ] }'
+  ref: errors/bankvic-problem-types.yml
+rate_limit_signaling:
+  detail: >-
+    CDR defines a Non-Functional Requirements traffic-threshold regime for holders,
+    but no rate-limit response headers are published on the public PRD endpoints.

@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+note: >-
+  Probed the /.well-known/ discovery surface on both the API host and the website host.
+  No discovery documents are published (all 404). Absence is recorded, valid data — no
+  WellKnown/SecurityTxt pointer is wired since nothing is present.
+hosts:
+  - host: https://ib.bankvic.com.au
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+      - { path: /.well-known/oauth-authorization-server, status: 404 }
+      - { path: /.well-known/api-catalog, status: 404 }
+      - { path: /.well-known/ai-plugin.json, status: 404 }
+  - host: https://www.bankvic.com.au
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+      - { path: /.well-known/oauth-authorization-server, status: 404 }
+      - { path: /.well-known/api-catalog, status: 404 }
+      - { path: /.well-known/ai-plugin.json, status: 404 }

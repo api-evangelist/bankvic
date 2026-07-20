@@ -1,0 +1,42 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/bankvic-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/
+note: >-
+  BankVic is an accredited Data Holder under Australia's Consumer Data Right (CDR).
+  Its API contract is the shared DSB Consumer Data Standards Banking API (v1.36.0 in
+  this repo), not a bank-proprietary spec, so conformance is largely to the CDR regime.
+standards:
+  - id: cdr-consumer-data-standards
+    conforms: true
+    evidence: >-
+      Contract is the DSB CDR Banking API; live PRD endpoints return CDS-shaped
+      payloads (data.products, x-v 4) at the standard cds-au/v1 path.
+  - id: cdr-product-reference-data
+    conforms: true
+    evidence: GET /banking/products and /banking/products/{productId} live and public.
+  - id: cds-versioning-headers
+    conforms: true
+    evidence: x-v required, x-min-v optional, x-v echoed; 406 on unsupported version.
+  - id: cds-pagination
+    conforms: true
+    evidence: page/page-size params with MetaPaginated + LinksPaginated response.
+  - id: cds-error-codes
+    conforms: true
+    evidence: ResponseErrorListV2 envelope with urn:au-cds:error:cds-all URNs.
+  - id: fapi-2.0-security-profile
+    conforms: partial
+    evidence: >-
+      Required for the consented consumer-data surface (OIDC + mTLS + PKCE + PAR) but
+      not exercised on the public PRD endpoints and not declared in this contract.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Uses the CDR ResponseErrorListV2 error model, not application/problem+json.
+  - id: oauth2
+    conforms: partial
+    evidence: OAuth2 authorization-code applies to the ADR-mediated surface only.
+regulatory:
+  - Authorised Deposit-taking Institution (ADI) regulated by APRA
+  - Australian Financial Services / Credit Licence holder (ASIC)
+  - CDR-accredited Data Holder (ACCC / OAIC oversight)
+  - Published CDR Policy (Consumer Data Right Policy)

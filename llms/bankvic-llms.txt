@@ -1,0 +1,31 @@
+# BankVic
+
+> BankVic (Police Financial Services Limited) is an Australian customer-owned mutual bank and authorised deposit-taking institution (ADI), founded 1974 in Melbourne. As a CDR-accredited Data Holder it publishes a public, unauthenticated Consumer Data Right Product Reference Data (PRD) API conforming to the DSB Consumer Data Standards.
+
+## APIs
+
+- [BankVic CDR Product Reference Data API](https://www.bankvic.com.au/get-help/open-banking/): Public PRD API — product catalogue (accounts, loans, term deposits, credit cards) with terms and key features. Base: https://ib.bankvic.com.au/openbanking/cds-au/v1
+  - GET /banking/products — list current products (paginated; requires header x-v: 4)
+  - GET /banking/products/{productId} — full product detail
+
+## Specs
+
+- [OpenAPI (CDR Banking API contract)](openapi/bankvic-cds-banking-products-openapi.yml)
+- [Data model](data-model/bankvic-data-model.yml)
+- [Overlay (AE enhancements)](overlays/bankvic-cds-banking-products-overlay.yaml)
+
+## Conventions & operations
+
+- [API conventions](conventions/bankvic-conventions.yml) — x-v header versioning, page/page-size pagination, CDR error envelope
+- [Authentication](authentication/bankvic-authentication.yml) — public PRD is unauthenticated; consented data via FAPI 2.0 OIDC + mTLS through an accredited Data Recipient
+- [Error catalog](errors/bankvic-problem-types.yml) — CDR urn:au-cds:error codes
+- [Lifecycle & versioning](lifecycle/bankvic-lifecycle.yml)
+- [Conformance](conformance/bankvic-conformance.yml) — CDR Consumer Data Standards
+- [Agentic access](agentic-access/bankvic-agentic-access.yml)
+- [Agent skill: query product reference data](skills/bankvic-product-reference-data.md)
+
+## Docs
+
+- [Open Banking / CDR at BankVic](https://www.bankvic.com.au/get-help/open-banking/)
+- [Consumer Data Standards (DSB)](https://consumerdatastandardsaustralia.github.io/standards/)
+- [Support](https://www.bankvic.com.au/get-help/) — info@bankvic.com.au, 13 63 73

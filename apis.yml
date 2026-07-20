@@ -53,10 +53,48 @@ apis:
     contract conforms to the shared DSB Consumer Data Standards, not a bank-proprietary
     specification.
 common:
+- type: AgenticAccess
+  url: agentic-access/bankvic-agentic-access.yml
+- type: DomainSecurity
+  url: security/bankvic-domain-security.yml
+- type: Authentication
+  url: authentication/bankvic-authentication.yml
+- type: ErrorCatalog
+  url: errors/bankvic-problem-types.yml
+- type: Conventions
+  url: conventions/bankvic-conventions.yml
+- type: Conformance
+  url: conformance/bankvic-conformance.yml
+- type: Lifecycle
+  url: lifecycle/bankvic-lifecycle.yml
+- type: Deprecation
+  url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+- type: DataModel
+  url: data-model/bankvic-data-model.yml
+- type: MCPServer
+  url: mcp/bankvic-mcp.yml
+- type: LLMsTxt
+  url: llms/bankvic-llms.txt
+- type: Overlay
+  url: overlays/bankvic-cds-banking-products-overlay.yaml
+- type: AgentSkill
+  url: skills/bankvic-product-reference-data.md
 - type: Website
   url: https://www.bankvic.com.au/
 - type: Documentation
   url: https://www.bankvic.com.au/get-help/open-banking/
+- type: DeveloperPortal
+  url: https://www.bankvic.com.au/get-help/open-banking/
+- type: GettingStarted
+  url: https://www.bankvic.com.au/get-help/open-banking/
+- type: APIReference
+  url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+- type: Support
+  url: https://www.bankvic.com.au/get-help/
+- type: TermsOfService
+  url: https://cdn.intelligencebank.com/au/share/NZw2/RVzr/yzJw/original/BankVic+Terms+%26+Conditions
+- type: PrivacyPolicy
+  url: https://cdn.intelligencebank.com/au/share/NZw2/19DD/6daB/original/Privacy+Policy
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

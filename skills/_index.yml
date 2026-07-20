@@ -1,0 +1,7 @@
+generated: '2026-07-20'
+method: generated
+skills:
+  - file: bankvic-product-reference-data.md
+    name: Query BankVic product reference data
+    api: openapi/bankvic-cds-banking-products-openapi.yml
+    operations: [listBankingProducts, getBankingProductDetail]

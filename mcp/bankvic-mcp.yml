@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/bankvic-cds-banking-products-openapi.yml
+note: >-
+  No official BankVic MCP server exists. This is a candidate tool surface derived from
+  the two publicly callable, unauthenticated Product Reference Data operations — the
+  only endpoints an agent can reach without CDR accreditation. The remaining consented
+  banking operations are excluded because they require an accredited Data Recipient.
+server:
+  name: bankvic-cdr-prd
+  transport: stdio
+  url: null
+tools:
+  - name: list_banking_products
+    description: >-
+      List BankVic's current products (accounts, loans, term deposits, credit cards)
+      with pagination and filters (effective, updated-since, brand, product-category).
+      Requires the x-v header (use 4).
+    source_operation: openapi/bankvic-cds-banking-products-openapi.yml#listBankingProducts
+    http: GET https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
+  - name: get_banking_product_detail
+    description: >-
+      Retrieve full detail for one product by productId — features, fees, deposit and
+      lending rates, eligibility, constraints, bundles. Requires the x-v header (use 4).
+    source_operation: openapi/bankvic-cds-banking-products-openapi.yml#getBankingProductDetail
+    http: GET https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products/{productId}
