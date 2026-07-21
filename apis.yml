@@ -24,7 +24,7 @@ tags:
 - Mutual Bank
 - Product Reference Data
 created: '2026-07-20'
-modified: '2026-07-20'
+modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
 - aid: bankvic:bankvic-cdr-product-reference-data-api
@@ -37,7 +37,7 @@ apis:
   - Australia
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.bankvic.com.au/get-help/open-banking/
-  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
   properties:
   - url: https://www.bankvic.com.au/get-help/open-banking/
     type: Documentation
@@ -49,9 +49,111 @@ apis:
     API exposing BankVic's product catalogue (accounts, loans, term deposits, credit
     cards) with terms, conditions, and key features. Live at the standard CDS path
     GET /banking/products and GET /banking/products/{productId}; confirmed returning
-    HTTP 200 with x-v 4 and a data.products array (55 products across 11 pages). The
-    contract conforms to the shared DSB Consumer Data Standards, not a bank-proprietary
+    HTTP 200 with x-v 4 (page-size=1 probe on 2026-07-21) and a data.products array.
+    The contract conforms to the shared DSB Consumer Data Standards, not a bank-proprietary
     specification.
+- aid: bankvic:bankvic-cdr-accounts-balances-api
+  name: BankVic CDR Accounts & Balances API
+  tags:
+  - CDR
+  - Open Banking
+  - Accounts
+  - Balances
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.bankvic.com.au/get-help/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+    type: APIReference
+  - url: openapi/bankvic-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-AUTHORIZED (not public) Consumer Data Right banking surface for
+    account discovery and balances, mediated through the CDR Accredited Data Recipient
+    (ADR) consent model with OIDC/FAPI authorization and MTLS. Covers the standardized
+    DSB CDS paths GET /banking/accounts, GET /banking/accounts/balances (and its POST
+    batch form), and GET /banking/accounts/{accountId}/balance and /{accountId} for
+    account detail. Requires an active consumer consent and holder-issued access token;
+    the contract is the shared DSB Consumer Data Standards Banking API, not a bank-proprietary
+    specification.
+- aid: bankvic:bankvic-cdr-transactions-api
+  name: BankVic CDR Transactions API
+  tags:
+  - CDR
+  - Open Banking
+  - Transactions
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.bankvic.com.au/get-help/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+    type: APIReference
+  - url: openapi/bankvic-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-AUTHORIZED Consumer Data Right transaction-history surface exposing
+    the standardized DSB CDS paths GET /banking/accounts/{accountId}/transactions and
+    GET /banking/accounts/{accountId}/transactions/{transactionId}, with date-range,
+    amount, and text filtering per the Consumer Data Standards. Access is mediated by
+    the CDR ADR consent model (OIDC/FAPI + MTLS) and requires an active consumer consent
+    and holder-issued access token. The contract is the shared DSB Consumer Data Standards
+    Banking API, not a bank-proprietary specification.
+- aid: bankvic:bankvic-cdr-direct-debits-scheduled-payments-api
+  name: BankVic CDR Direct Debits & Scheduled Payments API
+  tags:
+  - CDR
+  - Open Banking
+  - Direct Debits
+  - Scheduled Payments
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/accounts/direct-debits
+  properties:
+  - url: https://www.bankvic.com.au/get-help/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+    type: APIReference
+  - url: openapi/bankvic-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-AUTHORIZED Consumer Data Right surface for authorised direct-debit
+    arrangements and scheduled/recurring payments, covering the standardized DSB CDS
+    paths GET /banking/accounts/{accountId}/direct-debits and /banking/accounts/direct-debits
+    (POST batch), plus GET /banking/accounts/{accountId}/payments/scheduled and /banking/payments/scheduled
+    (POST batch). Access is mediated by the CDR ADR consent model (OIDC/FAPI + MTLS)
+    and requires an active consumer consent and holder-issued access token. The contract
+    is the shared DSB Consumer Data Standards Banking API, not a bank-proprietary specification.
+- aid: bankvic:bankvic-cdr-payees-api
+  name: BankVic CDR Payees API
+  tags:
+  - CDR
+  - Open Banking
+  - Payees
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/payees
+  properties:
+  - url: https://www.bankvic.com.au/get-help/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
+    type: APIReference
+  - url: openapi/bankvic-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-AUTHORIZED Consumer Data Right surface exposing a member's saved
+    payees, covering the standardized DSB CDS paths GET /banking/payees and GET /banking/payees/{payeeId}
+    for domestic, biller, and international payee detail. Access is mediated by the CDR
+    ADR consent model (OIDC/FAPI + MTLS) and requires an active consumer consent and
+    holder-issued access token. The contract is the shared DSB Consumer Data Standards
+    Banking API, not a bank-proprietary specification.
 common:
 - type: AgenticAccess
   url: agentic-access/bankvic-agentic-access.yml
