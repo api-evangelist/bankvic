@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: derived
+source: arazzo/*.yml
+workflows:
+  - file: bankvic-product-discovery.yml
+    workflowId: discoverProduct
+    title: BankVic product discovery
+    summary: >-
+      List the public CDR product catalogue then fetch one product's full detail;
+      runnable unauthenticated against the live PRD endpoint with x-v: 4.
+  - file: bankvic-account-data-overview.yml
+    workflowId: accountOverview
+    title: BankVic consented account data overview
+    summary: >-
+      ADR flow with active consent: list accounts, read a balance, page transactions
+      via the CDR OIDC/FAPI 2.0 authorised banking surface.

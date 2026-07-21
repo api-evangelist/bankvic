@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/bankvic-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#authorisation-scopes
+note: >-
+  The OpenAPI contract in this repo declares no oauth2 securitySchemes (it documents
+  the public Product Reference Data surface, which is unauthenticated, alongside the
+  consented consumer-data surface). BankVic's consented CDR banking surface is
+  authorised through the shared DSB Consumer Data Standards OAuth 2.0 / OIDC + FAPI 2.0
+  profile, whose authorisation scopes are the canonical CDR banking + common scopes
+  below (not bank-proprietary). Public PRD endpoints (listBankingProducts,
+  getBankingProductDetail) require NO scope. Scopes are requested by an accredited
+  Data Recipient (ADR); there is no self-service developer OAuth client for the public.
+schemes:
+  - name: CDR OIDC / FAPI 2.0 (authorization code + PKCE + PAR + mTLS)
+    source: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+    flows:
+      - flow: authorizationCode
+        note: >-
+          Authorization/token endpoints are published per Data Holder via the CDR
+          Register / holder OIDC discovery; BankVic acts as Data Holder. Tokens are
+          mTLS sender-constrained; consent is time-boxed and revocable.
+scopes:
+  - scope: openid
+    description: OIDC subject identifier; required to initiate a CDR authorisation.
+    flows: [authorizationCode]
+  - scope: profile
+    description: OIDC standard profile claims where consented.
+    flows: [authorizationCode]
+  - scope: bank:accounts.basic:read
+    description: Read basic account information (account list, type, balance summary).
+    operations: [listBankingAccounts, getBankingBalance, listBankingBalancesBulk, listBankingBalancesSpecificAccounts]
+    flows: [authorizationCode]
+  - scope: bank:accounts.detail:read
+    description: Read detailed account information (features, fees, account numbers).
+    operations: [getBankingAccountDetail]
+    flows: [authorizationCode]
+  - scope: bank:transactions:read
+    description: Read account transactions and transaction detail.
+    operations: [listBankingTransactions, getBankingTransactionDetail]
+    flows: [authorizationCode]
+  - scope: bank:regular_payments:read
+    description: Read direct debits, scheduled payments, and instalment plans.
+    operations: [listDirectDebits, listDirectDebitsBulk, listDirectDebitsSpecificAccounts, listScheduledPayments, listScheduledPaymentsBulk, listScheduledPaymentsSpecificAccounts, listInstalmentPlans, listInstalmentPlansBulk]
+    flows: [authorizationCode]
+  - scope: bank:payees:read
+    description: Read saved payees (domestic, biller, international).
+    operations: [listBankingPayees, getBankingPayeeDetail]
+    flows: [authorizationCode]
+  - scope: common:customer.basic:read
+    description: Read basic customer profile (name, occupation / organisation basics).
+    flows: [authorizationCode]
+  - scope: common:customer.detail:read
+    description: Read detailed customer profile (contact details, address).
+    flows: [authorizationCode]

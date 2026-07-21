@@ -1,0 +1,75 @@
+arazzo: 1.0.1
+info:
+  title: BankVic consented account data overview
+  version: 1.0.0
+  summary: >-
+    For an accredited Data Recipient (ADR) holding an active consumer consent: list the
+    member's accounts, read one account's current balance, then page its transactions.
+    Requires the CDR OIDC/FAPI 2.0 authorisation (mTLS-bound access token, scopes
+    bank:accounts.basic:read + bank:transactions:read) — NOT publicly runnable.
+sourceDescriptions:
+  - name: bankvic
+    url: ../openapi/bankvic-cds-banking-products-openapi.yml
+    type: openapi
+workflows:
+  - workflowId: accountOverview
+    summary: List accounts, read a balance, then page transactions for one account.
+    description: >-
+      Consented CDR banking flow. Send x-v: 1 (or the negotiated version), a valid
+      Authorization bearer token bound via mTLS, and the required CDR consent headers.
+    inputs:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: mTLS-bound CDR access token issued after consumer consent.
+        oldestTime:
+          type: string
+          description: Optional ISO date-time lower bound for transactions.
+    steps:
+      - stepId: listAccounts
+        description: List the accounts the consumer has consented to share.
+        operationId: listBankingAccounts
+        parameters:
+          - name: x-v
+            in: header
+            value: '1'
+          - name: page-size
+            in: query
+            value: 25
+        outputs:
+          firstAccountId: $response.body#/data/accounts/0/accountId
+      - stepId: getBalance
+        description: Read the current balance for the first consented account.
+        operationId: getBankingBalance
+        parameters:
+          - name: x-v
+            in: header
+            value: '1'
+          - name: accountId
+            in: path
+            value: $steps.listAccounts.outputs.firstAccountId
+        outputs:
+          currentBalance: $response.body#/data/currentBalance
+      - stepId: listTransactions
+        description: Page the transaction history for that account.
+        operationId: listBankingTransactions
+        parameters:
+          - name: x-v
+            in: header
+            value: '1'
+          - name: accountId
+            in: path
+            value: $steps.listAccounts.outputs.firstAccountId
+          - name: oldest-time
+            in: query
+            value: $inputs.oldestTime
+          - name: page-size
+            in: query
+            value: 25
+        outputs:
+          transactions: $response.body#/data/transactions
+    outputs:
+      accountId: $steps.listAccounts.outputs.firstAccountId
+      currentBalance: $steps.getBalance.outputs.currentBalance
+      transactions: $steps.listTransactions.outputs.transactions

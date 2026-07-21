@@ -1,0 +1,52 @@
+arazzo: 1.0.1
+info:
+  title: BankVic product discovery
+  version: 1.0.0
+  summary: >-
+    Discover BankVic's public product catalogue then drill into one product's full
+    terms via the unauthenticated CDR Product Reference Data (PRD) surface. Runnable
+    as-is against the live endpoint (no consent, no token) with the mandatory x-v: 4
+    request header.
+sourceDescriptions:
+  - name: bankvic
+    url: ../openapi/bankvic-cds-banking-products-openapi.yml
+    type: openapi
+workflows:
+  - workflowId: discoverProduct
+    summary: List products, then fetch full detail for the first product.
+    description: >-
+      Public PRD flow. No authorisation. Send x-v: 4 (version negotiation) on each call.
+    inputs:
+      type: object
+      properties:
+        productCategory:
+          type: string
+          description: Optional CDR productCategory filter (e.g. TERM_DEPOSITS, TRANS_AND_SAVINGS_ACCOUNTS).
+    steps:
+      - stepId: listProducts
+        description: Retrieve the public product catalogue (paginated).
+        operationId: listBankingProducts
+        parameters:
+          - name: x-v
+            in: header
+            value: '4'
+          - name: page-size
+            in: query
+            value: 25
+        outputs:
+          firstProductId: $response.body#/data/products/0/productId
+      - stepId: getProductDetail
+        description: Fetch full terms/conditions/features for the selected product.
+        operationId: getBankingProductDetail
+        parameters:
+          - name: x-v
+            in: header
+            value: '4'
+          - name: productId
+            in: path
+            value: $steps.listProducts.outputs.firstProductId
+        outputs:
+          productName: $response.body#/data/name
+    outputs:
+      productId: $steps.listProducts.outputs.firstProductId
+      productName: $steps.getProductDetail.outputs.productName

@@ -167,6 +167,16 @@ common:
   url: conventions/bankvic-conventions.yml
 - type: Conformance
   url: conformance/bankvic-conformance.yml
+- type: Compliance
+  url: https://uat.bankvic.com.au/documents/95c3605a8cf64a12ae35608ca0188c73.pdf
+- type: OAuthScopes
+  url: scopes/bankvic-scopes.yml
+- type: Arazzo
+  name: BankVic product discovery
+  url: arazzo/bankvic-product-discovery.yml
+- type: Arazzo
+  name: BankVic consented account data overview
+  url: arazzo/bankvic-account-data-overview.yml
 - type: Lifecycle
   url: lifecycle/bankvic-lifecycle.yml
 - type: Deprecation
@@ -193,6 +203,10 @@ common:
   url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
 - type: Support
   url: https://www.bankvic.com.au/get-help/
+- type: SignUp
+  url: https://www.bankvic.com.au/join-bankvic/
+- type: Login
+  url: https://ib.bankvic.com.au/
 - type: TermsOfService
   url: https://cdn.intelligencebank.com/au/share/NZw2/RVzr/yzJw/original/BankVic+Terms+%26+Conditions
 - type: PrivacyPolicy
