@@ -13,7 +13,19 @@ description: BankVic is an Australian customer-owned mutual bank and the trading
   unauthenticated Product Reference Data (PRD) API conforming to the Data Standards
   Body (DSB) Consumer Data Standards, alongside its consented, ADR-mediated consumer
   data-sharing surface.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bankvic.png
 tags:
 - Financial
 - Banks
@@ -27,133 +39,174 @@ created: '2026-07-20'
 modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
-- aid: bankvic:bankvic-cdr-product-reference-data-api
-  name: BankVic CDR Product Reference Data API
-  tags:
-  - CDR
-  - Open Banking
-  - Product Reference Data
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: bankvic:bankvic-banking-account-balances-api
+  name: BankVic Banking Account Balances API
+  description: Banking Account Balance endpoints
   humanURL: https://www.bankvic.com.au/get-help/open-banking/
   baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
-  properties:
-  - url: https://www.bankvic.com.au/get-help/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
-    type: APIReference
-  - url: openapi/bankvic-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Public, unauthenticated Consumer Data Right Product Reference Data (PRD)
-    API exposing BankVic's product catalogue (accounts, loans, term deposits, credit
-    cards) with terms, conditions, and key features. Live at the standard CDS path
-    GET /banking/products and GET /banking/products/{productId}; confirmed returning
-    HTTP 200 with x-v 4 (page-size=1 probe on 2026-07-21) and a data.products array.
-    The contract conforms to the shared DSB Consumer Data Standards, not a bank-proprietary
-    specification.
-- aid: bankvic:bankvic-cdr-accounts-balances-api
-  name: BankVic CDR Accounts & Balances API
   tags:
-  - CDR
-  - Open Banking
-  - Accounts
-  - Balances
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bankvic.com.au/get-help/open-banking/
-  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/accounts
+  - Banking Account Balances
   properties:
-  - url: https://www.bankvic.com.au/get-help/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
-    type: APIReference
-  - url: openapi/bankvic-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-AUTHORIZED (not public) Consumer Data Right banking surface for
-    account discovery and balances, mediated through the CDR Accredited Data Recipient
-    (ADR) consent model with OIDC/FAPI authorization and MTLS. Covers the standardized
-    DSB CDS paths GET /banking/accounts, GET /banking/accounts/balances (and its POST
-    batch form), and GET /banking/accounts/{accountId}/balance and /{accountId} for
-    account detail. Requires an active consumer consent and holder-issued access token;
-    the contract is the shared DSB Consumer Data Standards Banking API, not a bank-proprietary
-    specification.
-- aid: bankvic:bankvic-cdr-transactions-api
-  name: BankVic CDR Transactions API
+  - type: OpenAPI
+    url: openapi/bankvic-banking-account-balances-api-openapi.yml
+  - type: Documentation
+    url: https://www.bankvic.com.au/get-help/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
+- aid: bankvic:bankvic-banking-account-direct-debits-api
+  name: BankVic Banking Account Direct Debits API
+  description: Banking Account Direct Debit endpoints
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
   tags:
-  - CDR
-  - Open Banking
-  - Transactions
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bankvic.com.au/get-help/open-banking/
-  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/accounts
+  - Banking Account Direct Debits
   properties:
-  - url: https://www.bankvic.com.au/get-help/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
-    type: APIReference
-  - url: openapi/bankvic-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-AUTHORIZED Consumer Data Right transaction-history surface exposing
-    the standardized DSB CDS paths GET /banking/accounts/{accountId}/transactions and
-    GET /banking/accounts/{accountId}/transactions/{transactionId}, with date-range,
-    amount, and text filtering per the Consumer Data Standards. Access is mediated by
-    the CDR ADR consent model (OIDC/FAPI + MTLS) and requires an active consumer consent
-    and holder-issued access token. The contract is the shared DSB Consumer Data Standards
-    Banking API, not a bank-proprietary specification.
-- aid: bankvic:bankvic-cdr-direct-debits-scheduled-payments-api
-  name: BankVic CDR Direct Debits & Scheduled Payments API
+  - type: OpenAPI
+    url: openapi/bankvic-banking-account-direct-debits-api-openapi.yml
+  - type: Documentation
+    url: https://www.bankvic.com.au/get-help/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
+- aid: bankvic:bankvic-banking-account-scheduled-payments-api
+  name: BankVic Banking Account Scheduled Payments API
+  description: Banking Account Scheduled Payment endpoints
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
   tags:
-  - CDR
-  - Open Banking
-  - Direct Debits
-  - Scheduled Payments
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bankvic.com.au/get-help/open-banking/
-  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/accounts/direct-debits
+  - Banking Account Scheduled Payments
   properties:
-  - url: https://www.bankvic.com.au/get-help/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
-    type: APIReference
-  - url: openapi/bankvic-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-AUTHORIZED Consumer Data Right surface for authorised direct-debit
-    arrangements and scheduled/recurring payments, covering the standardized DSB CDS
-    paths GET /banking/accounts/{accountId}/direct-debits and /banking/accounts/direct-debits
-    (POST batch), plus GET /banking/accounts/{accountId}/payments/scheduled and /banking/payments/scheduled
-    (POST batch). Access is mediated by the CDR ADR consent model (OIDC/FAPI + MTLS)
-    and requires an active consumer consent and holder-issued access token. The contract
-    is the shared DSB Consumer Data Standards Banking API, not a bank-proprietary specification.
-- aid: bankvic:bankvic-cdr-payees-api
-  name: BankVic CDR Payees API
+  - type: OpenAPI
+    url: openapi/bankvic-banking-account-scheduled-payments-api-openapi.yml
+  - type: Documentation
+    url: https://www.bankvic.com.au/get-help/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
+- aid: bankvic:bankvic-banking-account-transactions-api
+  name: BankVic Banking Account Transactions API
+  description: Banking Account Transaction endpoints
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
   tags:
-  - CDR
-  - Open Banking
-  - Payees
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bankvic.com.au/get-help/open-banking/
-  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/payees
+  - Banking Account Transactions
   properties:
-  - url: https://www.bankvic.com.au/get-help/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
-    type: APIReference
-  - url: openapi/bankvic-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-AUTHORIZED Consumer Data Right surface exposing a member's saved
-    payees, covering the standardized DSB CDS paths GET /banking/payees and GET /banking/payees/{payeeId}
-    for domestic, biller, and international payee detail. Access is mediated by the CDR
-    ADR consent model (OIDC/FAPI + MTLS) and requires an active consumer consent and
-    holder-issued access token. The contract is the shared DSB Consumer Data Standards
-    Banking API, not a bank-proprietary specification.
+  - type: OpenAPI
+    url: openapi/bankvic-banking-account-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://www.bankvic.com.au/get-help/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
+- aid: bankvic:bankvic-banking-accounts-api
+  name: BankVic Banking Accounts API
+  description: Banking Account endpoints
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
+  tags:
+  - Banking Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/bankvic-banking-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.bankvic.com.au/get-help/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
+- aid: bankvic:bankvic-banking-payees-api
+  name: BankVic Banking Payees API
+  description: Banking Payee endpoints
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
+  tags:
+  - Banking Payees
+  properties:
+  - type: OpenAPI
+    url: openapi/bankvic-banking-payees-api-openapi.yml
+  - type: Documentation
+    url: https://www.bankvic.com.au/get-help/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
+- aid: bankvic:bankvic-banking-products-api
+  name: BankVic Banking Products API
+  description: Banking Product endpoints
+  humanURL: https://www.bankvic.com.au/get-help/open-banking/
+  baseURL: https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products
+  tags:
+  - Banking Products
+  properties:
+  - type: OpenAPI
+    url: openapi/bankvic-banking-products-api-openapi.yml
+  - type: Documentation
+    url: https://www.bankvic.com.au/get-help/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
 common:
 - type: AgenticAccess
   url: agentic-access/bankvic-agentic-access.yml
