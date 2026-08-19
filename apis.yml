@@ -37,7 +37,7 @@ tags:
 - Product Reference Data
 created: '2026-07-20'
 modified: '2026-07-21'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: bankvic:bankvic-banking-account-balances-api
   name: BankVic Banking Account Balances API
