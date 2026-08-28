@@ -13,6 +13,18 @@ description: BankVic is an Australian customer-owned mutual bank and the trading
   unauthenticated Product Reference Data (PRD) API conforming to the Data Standards
   Body (DSB) Consumer Data Standards, alongside its consented, ADR-mediated consumer
   data-sharing surface.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
