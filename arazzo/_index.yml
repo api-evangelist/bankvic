@@ -1,6 +1,6 @@
-generated: '2026-07-21'
-method: derived
-source: arazzo/*.yml
+x-generated: '2026-07-21'
+x-method: derived
+x-source: arazzo/*.yml
 workflows:
   - file: bankvic-product-discovery.yml
     workflowId: discoverProduct
