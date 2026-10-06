@@ -57,7 +57,7 @@ tags_raw:
 - Mutual Bank
 - Product Reference Data
 created: '2026-07-20'
-modified: '2026-07-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: bankvic:bankvic-banking-account-balances-api
@@ -229,6 +229,8 @@ apis:
   - type: APIReference
     url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
 common:
+- url: https://www.bankvic.com.au/our-story/news/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/bankvic-capability-edges.yml
   name: BankVic Business Capability Map
