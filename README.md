@@ -1,4 +1,4 @@
-# BankVic (bankvic)
+# BankVic
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,55 +64,144 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-BankVic is an Australian customer-owned mutual bank and the trading name of Police Financial Services Limited, an authorised deposit-taking institution (ADI) founded in 1974 and headquartered in Melbourne, Victoria. Member-owned rather than shareholder-driven, it has served Victoria's police, health, and emergency-services communities and the broader Victorian public under a "people before profits" ethos for more than fifty years. As a regulated ADI it participates in Australia's Consumer Data Right (CDR / Open Banking) regime and publishes a public, unauthenticated Product Reference Data (PRD) API.
+BankVic is an Australian customer-owned mutual bank and the trading name of Police Financial Services Limited, an authorised deposit-taking institution (ADI) founded in 1974 and headquartered in Melbourne, Victoria. Member-owned rather than shareholder-driven, it has served Victoria's police, health, and emergency-services communities and the broader Victorian public under a "people before profits" ethos for more than fifty years, offering everyday accounts, home and personal loans, term deposits, credit cards, and insurance. As a regulated ADI, BankVic participates in Australia's Consumer Data Right (CDR / Open Banking) regime and exposes a public, unauthenticated Product Reference Data (PRD) API conforming to the Data Standards Body (DSB) Consumer Data Standards, alongside its consented, ADR-mediated consumer data-sharing surface.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/bankvic/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/bankvic/refs/heads/main/apis.yml)
+**Areas:** Finance · Banks · Open Banking · CDR · Consumer Banking · Australia · Mutual Bank · Product Reference Data
 
-## Tags
+## BankVic on APIs.io
 
-- Financial
-- Banks
-- Open Banking
-- CDR
-- Consumer Banking
-- Australia
-- Mutual Bank
-- Product Reference Data
+Everything profiled for BankVic is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bankvic/](https://apis.io/providers/bankvic/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-07-20
-- **Modified:** 2026-07-20
+- [BankVic Banking Account Balances API](https://apis.io/apis/bankvic/bankvic-banking-account-balances-api/) — Banking Account Balance endpoints
+- [BankVic Banking Account Direct Debits API](https://apis.io/apis/bankvic/bankvic-banking-account-direct-debits-api/) — Banking Account Direct Debit endpoints
+- [BankVic Banking Account Scheduled Payments API](https://apis.io/apis/bankvic/bankvic-banking-account-scheduled-payments-api/) — Banking Account Scheduled Payment endpoints
+- [BankVic Banking Account Transactions API](https://apis.io/apis/bankvic/bankvic-banking-account-transactions-api/) — Banking Account Transaction endpoints
+- [BankVic Banking Accounts API](https://apis.io/apis/bankvic/bankvic-banking-accounts-api/) — Banking Account endpoints
+- [BankVic Banking Payees API](https://apis.io/apis/bankvic/bankvic-banking-payees-api/) — Banking Payee endpoints
+- [BankVic Banking Products API](https://apis.io/apis/bankvic/bankvic-banking-products-api/) — Banking Product endpoints
 
-## APIs
+### Published properties
 
-### BankVic CDR Product Reference Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Public, unauthenticated Consumer Data Right Product Reference Data (PRD) API exposing BankVic's product catalogue (accounts, loans, term deposits, credit cards) with terms, conditions, and key features. Live at the standard CDS path `GET /banking/products` and `GET /banking/products/{productId}`; confirmed returning HTTP 200 with `x-v: 4` and a `data.products` array (55 products across 11 pages). The contract conforms to the shared DSB Consumer Data Standards, not a bank-proprietary specification.
+#### Arazzo workflows (2)
 
-- **Human URL:** [https://www.bankvic.com.au/get-help/open-banking/](https://www.bankvic.com.au/get-help/open-banking/)
-- **Base URL:** `https://ib.bankvic.com.au/openbanking/cds-au/v1`
+Multi-step workflows that chain operations into a business task.
 
-#### Tags
+- [BankVic consented account data overview](https://apis.io/arazzos/bankvic/bankvic-account-data-overview/)
+- [BankVic product discovery](https://apis.io/arazzos/bankvic/bankvic-product-discovery/)
 
-- CDR
-- Open Banking
-- Product Reference Data
-- Banking
-- Australia
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://www.bankvic.com.au/get-help/open-banking/)
-- [API Reference](https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products)
-- [OpenAPI](openapi/bankvic-cds-banking-products-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [bankvic-cdr-prd](https://apis.io/servers/bankvic/bankvic-cdr-prd/)
 
-## Common Properties
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Bankvic Agentic Access](https://apis.io/agentic-access/bankvic/bankvic-agentic-access/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [CDR Banking Banking Account Balances API](https://apis.io/collections/bankvic/open-bankvic-banking-account-balances-api/)
+- [CDR Banking Banking Account Balances Banking Account Direct Debits API](https://apis.io/collections/bankvic/open-bankvic-banking-account-direct-debits-api/)
+- [CDR Banking Banking Account Balances Banking Account Scheduled Payments API](https://apis.io/collections/bankvic/open-bankvic-banking-account-scheduled-payments-api/)
+- [CDR Banking Banking Account Balances Banking Account Transactions API](https://apis.io/collections/bankvic/open-bankvic-banking-account-transactions-api/)
+- [CDR Banking Banking Account Balances Banking Accounts API](https://apis.io/collections/bankvic/open-bankvic-banking-accounts-api/)
+- [CDR Banking Banking Account Balances Banking Payees API](https://apis.io/collections/bankvic/open-bankvic-banking-payees-api/)
+- [CDR Banking Banking Account Balances Banking Products API](https://apis.io/collections/bankvic/open-bankvic-banking-products-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Bankvic Cds Banking Products Overlay](https://apis.io/overlays/bankvic/bankvic-cds-banking-products-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Bankvic Authentication](https://apis.io/security/bankvic/bankvic-authentication/)
+- [Bankvic Domain Security](https://apis.io/security/bankvic/bankvic-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Bankvic Scopes](https://apis.io/scopes/bankvic/bankvic-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.bankvic.com.au/)
 - [Documentation](https://www.bankvic.com.au/get-help/open-banking/)
+- [Getting started](https://www.bankvic.com.au/get-help/open-banking/)
+- [API reference](https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products)
+- [Sign up](https://www.bankvic.com.au/join-bankvic/)
+- [Support](https://www.bankvic.com.au/get-help/)
+- [Blog](https://www.bankvic.com.au/our-story/news/)
+- [Compliance](https://uat.bankvic.com.au/documents/95c3605a8cf64a12ae35608ca0188c73.pdf)
+- [Terms of service](https://cdn.intelligencebank.com/au/share/NZw2/RVzr/yzJw/original/BankVic+Terms+%26+Conditions)
+- [Privacy policy](https://cdn.intelligencebank.com/au/share/NZw2/19DD/6daB/original/Privacy+Policy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 41.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 44.7 |
+| Contract governance | 18.2 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 31.6 |
+
+**Agent readiness 25.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 38.6** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bankvic/](https://apis.io/providers/bankvic/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for BankVic: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bankvic/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
